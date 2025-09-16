@@ -81,8 +81,8 @@ def getSanJoseShortestPathProblem() -> ShortestPathProblem:
     # BEGIN_YOUR_CODE
     # Example: choose a start location and an end tag. You can change these as needed.
     # To find available locations and tags, run: python mapUtil.py > readableSanJoseMap.txt
-    startLocation = "5674926221"  # Example: Northeastern building (replace with your choice)
-    endTag = "amenity=food"       # Example: any place with food (replace with your choice)
+    startLocation = "7830771487"  # olla cocina
+    endTag = "landmark=city_hall"  # city hall
     return ShortestPathProblem(startLocation, endTag, cityMap)
     # END_YOUR_CODE
 
@@ -112,8 +112,10 @@ class WaypointsShortestPathProblem(SearchProblem):
         self.waypointTags = tuple(sorted(waypointTags))
 
     def startState(self) -> State:
-        # The memory is the set of waypoint tags that still need to be visited
-        return State(location=self.startLocation, memory=self.waypointTags)
+        # Remove any waypoint tags already present at the start location
+        start_tags = set(self.cityMap.tags.get(self.startLocation, []))
+        unvisited = tuple(sorted(set(self.waypointTags) - (start_tags & set(self.waypointTags))))
+        return State(location=self.startLocation, memory=unvisited)
 
     def isEnd(self, state: State) -> bool:
         # End if all waypoints have been visited (memory is empty) and location has endTag
@@ -149,9 +151,9 @@ def getSanJoseWaypointsShortestPathProblem() -> WaypointsShortestPathProblem:
     cityMap = createSanJoseMap()
     # Example: choose a start location, waypoint tags, and an end tag. You can change these as needed.
     # To find available locations and tags, run: python mapUtil.py > readableSanJoseMap.txt
-    startLocation = "5674926221"  # Example: Northeastern building (replace with your choice)
-    waypointTags = ["amenity=library", "amenity=food"]  # Example: must visit a library and a food place
-    endTag = "amenity=parking"  # Example: end at a parking location
+    startLocation = "7830771487"  # olla cocina
+    waypointTags = ["landmark=san_pedro_market", "landmark=philz"]  # must visit san pedro market and philz
+    endTag = "landmark=city_hall"  # end at city hall
     return WaypointsShortestPathProblem(startLocation, waypointTags, endTag, cityMap)
 
 ########################################################################################
