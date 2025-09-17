@@ -81,8 +81,8 @@ def getSanJoseShortestPathProblem() -> ShortestPathProblem:
     # BEGIN_YOUR_CODE
     # Example: choose a start location and an end tag. You can change these as needed.
     # To find available locations and tags, run: python mapUtil.py > readableSanJoseMap.txt
-    startLocation = "7830771487"  # olla cocina
-    endTag = "landmark=city_hall"  # city hall
+    startLocation = "9522979702"  # northeastern_building
+    endTag = "label=7143336237"  # parking entrance by my apartment
     return ShortestPathProblem(startLocation, endTag, cityMap)
     # END_YOUR_CODE
 
@@ -151,9 +151,10 @@ def getSanJoseWaypointsShortestPathProblem() -> WaypointsShortestPathProblem:
     cityMap = createSanJoseMap()
     # Example: choose a start location, waypoint tags, and an end tag. You can change these as needed.
     # To find available locations and tags, run: python mapUtil.py > readableSanJoseMap.txt
-    startLocation = "7830771487"  # olla cocina
-    waypointTags = ["landmark=san_pedro_market", "landmark=philz"]  # must visit san pedro market and philz
-    endTag = "landmark=city_hall"  # end at city hall
+    # A route I sometimes take from NEU back to my apartment with a coffee stop. 
+    startLocation = "9522979702"  # northeastern_building
+    waypointTags = ["landmark=philz"]  # must visit philz
+    endTag = "label=7143336237"  # parking entrance by my apartment
     return WaypointsShortestPathProblem(startLocation, waypointTags, endTag, cityMap)
 
 ########################################################################################
